@@ -1,0 +1,2 @@
+id,production_id,shipment_date,quantity,customer_name,customer_contact,created_at
+1,1,2025-03-11,30.0,茶商店株式会社,contact@example.com,2025-03-11 10:18:21

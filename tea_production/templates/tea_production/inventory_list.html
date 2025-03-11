@@ -1,0 +1,42 @@
+{% extends "tea_production/base.html" %}
+
+{% block title %}在庫一覧{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>在庫一覧</h1>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>茶葉の種類</th>
+                        <th>生産日</th>
+                        <th>在庫量</th>
+                        <th>品質評価</th>
+                        <th>最終更新</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in inventory %}
+                    <tr>
+                        <td>{{ item.production.tea_type }}</td>
+                        <td>{{ item.production.production_date }}</td>
+                        <td>{{ item.quantity }}kg</td>
+                        <td>{{ item.production.quality_check }}</td>
+                        <td>{{ item.last_updated }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">在庫データがありません。</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %} 

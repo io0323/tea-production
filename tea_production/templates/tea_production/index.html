@@ -1,0 +1,84 @@
+{% extends "tea_production/base.html" %}
+
+{% block title %}ダッシュボード{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">KNGW TEA PRODUCTION</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">在庫状況</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>茶葉の種類</th>
+                                <th>在庫量</th>
+                                <th>品質評価</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in inventory %}
+                            <tr>
+                                <td>{{ item.production.tea_type }}</td>
+                                <td>{{ item.quantity }}kg</td>
+                                <td>{{ item.production.quality_check }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">生産サマリー</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>茶葉の種類</th>
+                                <th>総生産回数</th>
+                                <th>総生産量</th>
+                                <th>A級品率</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in production_summary %}
+                            <tr>
+                                <td>{{ item.tea_type }}</td>
+                                <td>{{ item.total_productions }}回</td>
+                                <td>{{ item.total_quantity }}kg</td>
+                                <td>{{ item.quality_a_percentage|floatformat:1 }}%</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <a href="{% url 'tea_production:production_create' %}" class="btn btn-primary mb-3">
+            新規生産データ登録
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a href="{% url 'tea_production:shipment_create' %}" class="btn btn-success mb-3">
+            新規出荷データ登録
+        </a>
+    </div>
+</div>
+{% endblock %} 
